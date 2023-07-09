@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>社員詳細画面</title>
+</head>
+<body>
+	<h1>社員詳細</h1>
+	<h2 th:each="employee : ${employeeList}" th:text="${employee.name}"></h2>
+	<form action="/attendance/clockRegister" method="post">
+		<button type="submit" name="button" value="出勤">出勤</button> 
+		<button type="submit" name="button" value="休憩開始">休憩開始</button> 
+		<button type="submit" name="button" value="休憩終了">休憩終了</button> 
+		<button type="submit" name="button" value="退勤">退勤</button>
+		<input type="hidden" name="employeeId" th:each="employee : ${employeeList}" th:value="${employee.id}">
+		
+		<table border="1">
+			<tr>
+				<th>出勤日時</th>
+				<th>休憩開始日時</th>
+				<th>休憩終了日時</th>
+				<th>退勤日時</th>
+			</tr>
+			<tr th:each="clock : ${clockList}">
+				<td th:text="${clock.clockIn}"></td>
+				<td th:text="${clock.breakStart}"></td>
+				<td th:text="${clock.breakEnd}"></td>
+				<td th:text="${clock.clockOut}"></td>
+			</tr>
+		</table>
+	</form>
+	<form action="/attendance/employeeList" method="get">
+		<button type="submit">社員一覧へ</button>
+	</form>
+</body>
+</html>
