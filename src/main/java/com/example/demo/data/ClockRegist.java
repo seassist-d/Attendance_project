@@ -35,4 +35,14 @@ public class ClockRegist {
 	 */
 	@JsonProperty("break_end")
 	private String breakEnd;
+	
+	/**
+	 * 
+	 */
+	public ClockRegist() {
+		this.clockIn = "";
+		this.clockOut = "";
+		this.breakStart = "";
+		this.breakEnd = "";
+	}
 }

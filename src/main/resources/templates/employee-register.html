@@ -5,6 +5,15 @@
 <title>社員登録画面</title>
 </head>
 <body>
-
+	<h1>社員新規登録</h1>
+	<form action="/attendance/employee-register" method="post">
+		氏名<input type="text" name="name" placeholder="山田 太郎"><br>
+		出身地<input type="text" name="hometown" placeholder="都道府県を選択または"><br>
+		入社月<input type="month" name="joiningMonth"><br>
+		<button type="submit">登録する</button>
+	</form>
+	<form action="/attendance/employee-list" method="get">
+		<button type="submit">社員一覧へ</button>
+	</form>
 </body>
 </html>

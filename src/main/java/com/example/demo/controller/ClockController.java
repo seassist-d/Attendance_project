@@ -48,7 +48,16 @@ public class ClockController {
 		this.clockService = clockService;
 	}
 
-	@PostMapping("/attendance/clockRegister")
+	/**
+	 * 勤怠情報登録
+	 * @param button 出勤、退勤、休憩時間ボタン
+	 * @param employeeId 社員ID
+	 * @param model
+	 * @return 社員詳細画面のHTML
+	 * @throws JsonMappingException
+	 * @throws JsonProcessingException
+	 */
+	@PostMapping("/attendance/clock-register")
 	public String registerClock(@RequestParam("button") String button, @RequestParam("employeeId") Number employeeId,
 			Model model) throws JsonMappingException, JsonProcessingException {
 		clockService.registerClock(button, employeeId);

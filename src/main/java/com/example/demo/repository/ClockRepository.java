@@ -1,6 +1,5 @@
 package com.example.demo.repository;
 
-
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -28,34 +27,44 @@ public class ClockRepository {
 	 */
 	public Clock[] getClock(Number employeeId) throws JsonMappingException, JsonProcessingException {
 		String url = "https://jsn9xu2vsk.execute-api.ap-northeast-1.amazonaws.com/sample/attendanceandabsence/clock";
-		
+
 		if (employeeId != null) {
-			url  += "?employeeId=" + employeeId;
+			url += "?employeeId=" + employeeId;
 		}
-		
+
 		RestTemplate rest = new RestTemplate();
-		
+
 		ResponseEntity<String> response = rest.getForEntity(url, String.class);
-		
+
 		String json = response.getBody();
-		
+
 		ObjectMapper mapper = new ObjectMapper();
-		
+
 		Clock[] clockList = mapper.readValue(json, Clock[].class);
-		
+
 		return clockList;
 	}
-	
+
+	/**
+	 * 勤怠登録
+	 * @param clock 勤怠情報
+	 */
 	public void registerClock(ClockRegist clock) {
 		String url = "https://jsn9xu2vsk.execute-api.ap-northeast-1.amazonaws.com/sample/attendanceandabsence/clock";
-		
-		RequestEntity<ClockRegist> request = RequestEntity.post(url)
-													.contentType(MediaType.APPLICATION_JSON)
-													.body(clock);
-		
+
+		String body = "{\"body\":\"{"
+				+ "\\\"employee_id\\\":\\\"" + clock.getEmployeeId() + "\\\","
+				+ "\\\"clock_in\\\":\\\"" + clock.getClockIn() + "\\\","
+				+ "\\\"break_start\\\":\\\"" + clock.getBreakStart() + "\\\","
+				+ "\\\"break_end\\\":\\\"" + clock.getBreakEnd() + "\\\","
+				+ "\\\"clock_out\\\":\\\"" + clock.getClockOut() + "\\\""
+				+ "}\"}";
+
+		RequestEntity<String> request = RequestEntity.post(url)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(body);
+
 		RestTemplate rest = new RestTemplate();
 		ResponseEntity<String> response = rest.exchange(request, String.class);
-		
-		System.out.println(response);
 	}
 }

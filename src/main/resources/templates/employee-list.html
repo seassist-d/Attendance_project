@@ -6,6 +6,9 @@
 </head>
 <body>
 	<h1>社員一覧</h1>
+	<form action="/attendance/employee-register" method="get">
+		<button type="submit">社員新規登録</button>
+	</form>
 	<table border="1">
 		<tr>
 			<th>No</th>
@@ -14,7 +17,7 @@
 			<th>入社月</th>
 			<th></th>
 		</tr>
-		<form action="/attendance/employeeDetail" method="post">
+		<form action="/attendance/employee-detail" method="post">
 			<tr th:each="employee : ${employeeList}">
 				<td th:text="${employee.id}"></td>
 				<td th:text="${employee.name}"></td>

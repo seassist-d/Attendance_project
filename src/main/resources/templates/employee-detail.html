@@ -7,7 +7,7 @@
 <body>
 	<h1>社員詳細</h1>
 	<h2 th:each="employee : ${employeeList}" th:text="${employee.name}"></h2>
-	<form action="/attendance/clockRegister" method="post">
+	<form action="/attendance/clock-register" method="post">
 		<button type="submit" name="button" value="出勤">出勤</button> 
 		<button type="submit" name="button" value="休憩開始">休憩開始</button> 
 		<button type="submit" name="button" value="休憩終了">休憩終了</button> 
@@ -29,7 +29,7 @@
 			</tr>
 		</table>
 	</form>
-	<form action="/attendance/employeeList" method="get">
+	<form action="/attendance/employee-list" method="get">
 		<button type="submit">社員一覧へ</button>
 	</form>
 </body>

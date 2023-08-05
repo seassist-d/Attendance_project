@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.Employee;
+import com.example.demo.data.EmployeeRegist;
 import com.example.demo.repository.EmployeeRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -20,7 +21,6 @@ public class EmployeeService {
 	/**
 	 * 社員情報 Repository
 	 */
-	@Autowired
 	private EmployeeRepository employeeRepository;
 	
 	/**
@@ -34,6 +34,7 @@ public class EmployeeService {
 	 * コンストラクタ
 	 * @param employeeRepository
 	 */
+	@Autowired
 	public EmployeeService(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
 	}
@@ -49,5 +50,20 @@ public class EmployeeService {
 		Employee[] employeeList = employeeRepository.getEmployee(employeeId);
 		
 		return Arrays.asList(employeeList);
+	}
+	
+	/**
+	 * 社員情報登録
+	 * @param name 氏名
+	 * @param hometown 出身地
+	 * @param joiningMonth 入社月
+	 */
+	public void registerEmployee(String name, String hometown, String joiningMonth) {	
+		EmployeeRegist employeeRegist = new EmployeeRegist();
+		employeeRegist.setName(name);
+		employeeRegist.setHometown(hometown);
+		employeeRegist.setJoiningMonth(joiningMonth);
+		
+		employeeRepository.registerEmployee(employeeRegist);
 	}
 }
